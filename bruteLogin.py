@@ -22,6 +22,6 @@ def bruteLogin(hostname, passwdFile):
     return (None, None)
 
 
-host = '192.168.95.179'
+host = '{ADD HOST IP}'
 passwdFile = 'userpass.txt'
 bruteLogin(host, passwdFile)
