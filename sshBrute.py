@@ -16,7 +16,7 @@ def connect(host, user, password, release):
     try:
         s = pxssh.pxssh()
         s.login(host, user, password)
-        print '[+] Password Found: ' + password
+        print('[+] Password Found: ' + password)
         Found = True
     except Exception, e:
         if 'read_nonbloacking' in str(e):
@@ -52,7 +52,7 @@ def main():
             print("[!] Exiting: Password Found")
             exit(0)
         if Fails > 5:
-            print "[!] Exiting: Too Many Socket Timeouts"
+            print("[!] Exiting: Too Many Socket Timeouts")
             exit (0)
 
         connection_lock.acquire()
