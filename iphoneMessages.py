@@ -48,7 +48,7 @@ def main():
             iphoneDB = os.path.join(pathName, fileName)
             if isMessageTable(iphoneDB):
                 try:
-                    (print '\n[*] --- Found Messages ---')
+                    print('\n[*] --- Found Messages ---')
                     printMessage(iphoneDB)
                 except:
                     pass
