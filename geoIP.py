@@ -15,5 +15,5 @@ def printRecord(tgt):
     print('[+] ' + str(city) + ', ' + str(region) + ', ' + str(country))
     print('[+] Latitude: ' + str(lat) + ', Longitude: ' + str(long))
 
-tgt = '<HOST IP>'
+tgt = '192.168.0.1'
 printRecord(tgt)
