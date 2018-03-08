@@ -16,7 +16,7 @@ def injectPage(ftp, page, redirect):
     print('[+] Uploaded Injected Page: ' + page)
 
 
-host = '<HOST IP>'
+host = '192.168.0.1'
 username = 'guest'
 password = 'guest'
 ftp = ftplib.FTP(host)
