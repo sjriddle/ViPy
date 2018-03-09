@@ -5,7 +5,6 @@ import optparse
 import socket
 THRESH = 1000
 
-
 def findDownload(pcap):
     for (ts, buf) in pcap:
         try:
@@ -21,7 +20,6 @@ def findDownload(pcap):
                     print('[!] ' + src + ' Download LOIC.')
         except:
             pass
-
 
 def findHivemind(pcap):
     for (ts, buf) in pcap:
@@ -43,7 +41,6 @@ def findHivemind(pcap):
                     print('[+] Target CMD: ' + tcp.data)
         except:
             pass
-
 
 def findAttack(pcap):
     pktCount = {}
@@ -70,7 +67,6 @@ def findAttack(pcap):
             src = stream.split(':')[0]
             dst = stream.split(':')[1]
             print('[+] ' + src + ' attacked ' + dst + ' with ' + str(pktsSent) + ' pkts.')
-
 
 def main():
     parser = optparse.OptionParser("usage %prog ' + '-p <pcap file> -t <thresh>")
