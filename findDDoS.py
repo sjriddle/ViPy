@@ -5,6 +5,7 @@ import optparse
 import socket
 THRESH = 1000
 
+
 def findDownload(pcap):
     for (ts, buf) in pcap:
         try:
@@ -21,6 +22,7 @@ def findDownload(pcap):
         except:
             pass
 
+        
 def findHivemind(pcap):
     for (ts, buf) in pcap:
         try:
@@ -31,10 +33,12 @@ def findHivemind(pcap):
             tcp = ip.data
             dport = tcp.dport
             sport = tcp.sport
+            
             if dport == 6667:
                 if '!lazor' in tcp.data.lower():
                     print('[!] DDoS Hivemind issued by: ' + src)
                     print('[+] Target CMD: ' + tcp.data)
+                    
             if sport == 6667:
                 if '!lazor' in tcp.data.lower():
                     print('[!] DDoS Hivemind issued to: ' + src)
@@ -42,6 +46,7 @@ def findHivemind(pcap):
         except:
             pass
 
+        
 def findAttack(pcap):
     pktCount = {}
     for (ts, buf) in pcap:
@@ -68,17 +73,20 @@ def findAttack(pcap):
             dst = stream.split(':')[1]
             print('[+] ' + src + ' attacked ' + dst + ' with ' + str(pktsSent) + ' pkts.')
 
+            
 def main():
     parser = optparse.OptionParser("usage %prog ' + '-p <pcap file> -t <thresh>")
     parser.add_option('-p', dest='pcapFile', type='string', help='specify pcap filename')
     parser.add_option('-t', dest='thresh', type='int', help='specify threshold count ')
-
     (options, args) = parser.parse_args()
+    
     if options.pcapFile == None:
         print(parser.usage)
         exit(0)
+        
     if options.thresh != None:
         THRESH = options.thresh
+        
     pcapFile = options.pcapFile
     f = open(pcapFile)
     pcap = dpkt.pcap.Reader(f)
