@@ -1,8 +1,8 @@
 #!/usr/bin/python
-
 import os
 import sqlite3
 import optparse
+
 
 def isMessageTable(iphoneDB):
     try:
@@ -12,7 +12,6 @@ def isMessageTable(iphoneDB):
         for row in c:
             if 'message' in str(row):
                 return True
-
         except:
             return False
 
@@ -27,10 +26,8 @@ def printMessage(msgDB):
             addr = str(row[1])
             text = row[2]
             print('\n[+] Date: ' + date + ', Addr: ' + addr + ' Message: ' + text)
-
     except:
         pass
-
 
 
 def main():
