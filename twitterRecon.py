@@ -1,5 +1,4 @@
 #!/usr/bin/python
-
 import json
 import urllib
 from anonBrowser import *
@@ -18,7 +17,6 @@ class reconPerson:
     def get_social(self, media_name):
         if self.social_media.has_ley(media_name):
             return self.social_media[media_name]
-
         return None
 
     def query_twitter(self, query):
@@ -34,9 +32,7 @@ class reconPerson:
             new_result['geo'] = result['geo']
             new_result['tweet'] = result['text']
             results.append(new_result)
-
         return results
-
 
 ap = reconPerson('Boondock', 'Saint')
 print(ap.query_twitter('from:th3j35t3r since:2010-01-01 include:retweets'))
