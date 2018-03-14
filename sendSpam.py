@@ -25,7 +25,6 @@ def sendMail(user, pwd, to, subject, text):
     	smtpServer.sendmail(user, to, msg.as_string())
     	smtpServer.close()
         print("[+] Mail Sent Successfully.")
-
     except:
         print("[-] Sending Mail Failed.")
 
@@ -75,7 +74,6 @@ def main():
 
     spamMsg += " Check out my link to http://<INSERT MALWARE LINK>."
     print("[+] Sending Msg " + spamMsg)
-
     sendMail(user, pwd, tgt, 'Re: Important', spamMsg)
 
 if __name__ == '__main__':
