@@ -5,7 +5,6 @@ from threading import *
 
 maxConnections = 5
 connection_lock = BoundedSemaphore(value=maxConnections)
-
 Found = False
 Fails = 0
 
@@ -32,7 +31,6 @@ def connect(host, user, password, release):
 
 def main():
     parser = optparse.OptionParser('usage %prog '+'-H <target host> -u <user> -F <password list>')
-
     parser.add_option('-H', dest='tgtHost', type='string', help='specify target host')
     parser.add_option('-F', dest='passwdFile', type='string', help='specify password file')
     parser.add_option('-u', dest='user', type='string', help='specify user host')
