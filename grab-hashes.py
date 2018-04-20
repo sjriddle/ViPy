@@ -1,29 +1,23 @@
 import sys
 import struct
-
-memory_file = "WinXPSP2.vmem"
-
-sys.path.append("/Downloads/volatility-2.3.1")
-
 import volatility.conf as conf
 import volatility.registry as registry
+import volatility.commands as commands
+import volatility.addrspace as addrspace
+from volatility.plugins.registry.registryapi import RegistryApi
+from volatility.plugins.registry.lsadump import HashDump
+
+memory_file = "WinXPSP2.vmem"
+sys.path.append("/Downloads/volatility-2.3.1")
 
 registry.PluginImporter()
 config = conf.ConfObject()
-
-import volatility.commands as commands
-import volatility.addrspace as addrspace
-
 config.parse_options()
 config.PROFILE  = "WinXPSP2x86"
 config.LOCATION = "file://%s" % memory_file
 
 registry.register_global_options(config, commands.Command)
 registry.register_global_options(config, addrspace.BaseAddressSpace)
-
-from volatility.plugins.registry.registryapi import RegistryApi
-from volatility.plugins.registry.lsadump import HashDump
-
 registry = RegistryApi(config)
 registry.populate_offsets()
 
