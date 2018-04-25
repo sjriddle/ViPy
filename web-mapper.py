@@ -9,7 +9,6 @@ directory = "/Users/<USERNAME>/Downloads/joomla3-1.1"
 filters = [".jpg", ".gif", "png", ".css"]
 
 os.chdir(directory)
-
 web_paths = Queue.Queue()
 
 for r,d,f in os.walk("."):
@@ -38,7 +37,6 @@ def test_remote():
             pass
         
         
-
 for i in range(threads): 
     print("Spawning thread: %d" % i)
     t = threading.Thread(target=test_remote)
