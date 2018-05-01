@@ -1,6 +1,7 @@
 from pexpect import pxssh
 
 class Bot:
+    
     # Initialize new client
     def __init__(self, host, user, password):
         self.host = host
