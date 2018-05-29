@@ -5,6 +5,7 @@ HOST_NAME = '10.10.10.100'
 PORT_NUMBER = 80
 
 class myHandler(BaseHTTPServer.BaseHTTPRequestHandler):
+    
     def do_get(s):
         if s.path == '/store':
             try:
@@ -17,16 +18,13 @@ class myHandler(BaseHTTPServer.BaseHTTPRequestHandler):
                     print("[-] Unexpected POST Request")
 
                 fs_up = fs['file']
-
                 with open('/root/Desktop/1.txt', 'wb') as o:
                     o.write(fs_up.file.read())
                     s.send_response(200)
                     s.end_headers()
             except Exception as e:
                 print(e)
-
             return
-
         s.send_response(200)
         s.end_headers()
         length = int(s.headers['Content-Length'])
@@ -39,5 +37,5 @@ if __name__ == '__main__':
     try:
         httpd.serve_forever()
     except KeyboardInterrupt:
-        print('[!] Server is Terminated')
+        print('[!] Server Terminated')
         httpd.server_close()
