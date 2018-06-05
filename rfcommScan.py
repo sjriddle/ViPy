@@ -1,5 +1,3 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
 from bluetooth import *
 
 def rfcommConnection(addr, port):
