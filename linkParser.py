@@ -1,5 +1,3 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
 from anonBrowser import *
 from BeautifulSoup import BeautifulSoup
 import os
@@ -12,7 +10,6 @@ def printLinks(url):
     ab.anonymize()
     page = ab.open(url)
     html = page.read()
-
     try:
         print('[+] Printing Links From Regex.')
         link_finder = re.compile('href="(.*?)"')
@@ -21,7 +18,6 @@ def printLinks(url):
             print(link)
     except:
         pass
-
     try:
         print('\n[+] Printing Links From BeautifulSoup.')
         soup = BeautifulSoup(html)
@@ -38,7 +34,6 @@ def main():
     parser.add_option('-u', dest='tgtURL', type='string', helf='specify target url')
     (options, args) = parser.parse_args()
     url = option.tgtURL
-
     if url == None:
         print(parser.usage)
         exit(0)
