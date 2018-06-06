@@ -1,11 +1,10 @@
-#!/usr/bin/python
 import ftplib
 
 def anonLogin(hostname):
     try:
         ftp = ftplib.FTP(hostname)
         ftp.login('anonymous', 'me@your.com')
-        print('\n[*] ' + str(hostname) + 'FTP Anonymous Login Success.')
+        print('\n[*] ' + str(hostname) + ' FTP Anonymous Login Success.')
         ftp.quit()
         return True
     except:
