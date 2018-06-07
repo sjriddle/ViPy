@@ -1,5 +1,3 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
 import ftplib
 
 def injectPage(ftp, page, redirect):
