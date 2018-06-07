@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 import optparse
 from scapy.all import *
 
