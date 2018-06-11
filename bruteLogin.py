@@ -1,5 +1,6 @@
 import ftplib, time
 
+
 def bruteLogin(hostname, passwdFile):
     pF = open(passwdFile, 'r')
     for line in pF.readlines():
