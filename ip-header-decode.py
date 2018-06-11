@@ -4,7 +4,7 @@ import struct
 from ctypes import *
 
 # Host to listen on
-host   = "192.168.0.1"
+host = "192.168.0.1"
 
 class IP(Structure):
 
@@ -47,8 +47,6 @@ else:
     
 sniffer = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket_protocol)
 sniffer.bind((host, 0))
-
-# We want the IP headers included in the capture
 sniffer.setsockopt(socket.IPPROTO_IP, socket.IP_HDRINCL, 1)
 
 # If we're on Windows we need to send some ioctls
