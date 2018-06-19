@@ -4,7 +4,7 @@ import struct
 from ctypes import *
 
 # Host to listen on
-host = "192.168.0.1"
+host = "{INPUT HOST}"
 
 class IP(Structure):
 
@@ -25,7 +25,6 @@ class IP(Structure):
     def __new__(self, socket_buffer=None):
         return self.from_buffer_copy(socket_buffer)    
     def __init__(self, socket_buffer=None):
-
         # Map protocol constants to their names
         self.protocol_map = {1:"ICMP", 6:"TCP", 17:"UDP"}
 
@@ -49,11 +48,9 @@ sniffer = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket_protocol)
 sniffer.bind((host, 0))
 sniffer.setsockopt(socket.IPPROTO_IP, socket.IP_HDRINCL, 1)
 
-# If we're on Windows we need to send some ioctls
-# To setup promiscuous mode
+# If we're on Windows we need to send some ioctls to setup promiscuous mode
 if os.name == "nt":
     sniffer.ioctl(socket.SIO_RCVALL, socket.RCVALL_ON)
-    
 try:
     while True:
         # Read in a single packet
@@ -62,7 +59,6 @@ try:
         # Create an IP header from the first 20 bytes of the buffer
         ip_header = IP(raw_buffer[0:20])
         print("Protocol: %s %s -> %s" % (ip_header.protocol, ip_header.src_address, ip_header.dst_address))
-        
 except KeyboardInterrupt:
     # If we're on Windows turn off promiscuous mode
     if os.name == "nt":
