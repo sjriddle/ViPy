@@ -1,5 +1,4 @@
 #!/usr/bin/python
-# -*- coding: utf-8 -*-
 import pygeoip
 gi = pygeoip.GeoIP('/opt/GeoIP/Geo.dat')
 
