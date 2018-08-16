@@ -4,7 +4,6 @@ from socket import *
 from threading import *
 screenLock = Semaphore(value=1)host
 
-
 def connScan(tgtHost, tgtPort):
     try:
         connSkt = socket(AF_INET, SOCK_STREAM)
@@ -50,7 +49,6 @@ def main():
         print(parser.usage)
         exit(0)
     portScan(tgtHost, tgtPorts)
-
 
 if __name__ == "__main__":
     main()
