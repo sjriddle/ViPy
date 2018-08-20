@@ -4,7 +4,7 @@ import httplib
 import time
 import os
 import optparse
-from urlparse import 
+from urlparse import urlparse
 
 
 def printResults(url):
