@@ -41,17 +41,17 @@ def uploadFile(fileName):
     print('[+] Uploading File to NoVirusThanks...')
     fileContents = open(fileName,'rb').read()
     header = {'Content-Type': 'multipart/form-data; boundary=----WebKitFormBoundaryF17rwCZdGuPNPT9U'}
-    params = "------WebKitFormBoundaryF17rwCZdGuPNPT9U"
-    params += "\r\nContent-Disposition: form-data; " + "name=\"upfile\"; filename=\""+str(fileName)+"\""
-    params += "\r\nContent-Type: " + "application/octet stream\r\n\r\n"
+    params = '------WebKitFormBoundaryF17rwCZdGuPNPT9U'
+    params += '\r\nContent-Disposition: form-data; ' + 'name=\'upfile\'; filename=\''+str(fileName)+'\''
+    params += '\r\nContent-Type: ' + 'application/octet stream\r\n\r\n'
     params += fileContents
-    params += "\r\n------WebKitFormBoundaryF17rwCZdGuPNPT9U"
-    params += "\r\nContent-Disposition: form-data; " + "name=\"submitfile\"\r\n"
-    params += "\r\nSubmit File\r\n"
-    params += "------WebKitFormBoundaryF17rwCZdGuPNPT9U--\r\n"
+    params += '\r\n------WebKitFormBoundaryF17rwCZdGuPNPT9U'
+    params += '\r\nContent-Disposition: form-data; ' + 'name=\'submitfile\'\r\n'
+    params += '\r\nSubmit File\r\n'
+    params += '------WebKitFormBoundaryF17rwCZdGuPNPT9U--\r\n'
 
     conn = httplib.HTTPConnection('vscan.novirusthanks.org')
-    conn.request("POST", "/", params, header)
+    conn.request('POST', '/', params, header)
     response = conn.getresponse()
     location = response.getheader('location')
     conn.close()
