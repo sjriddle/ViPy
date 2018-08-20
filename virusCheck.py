@@ -1,11 +1,10 @@
 #!/usr/bin/python
 import re
-import httplib
+import http.client
 import time
 import os
 import optparse
-from urlparse import urlparse
-
+from urllib import *
 
 def printResults(url):
     status = 200
@@ -14,7 +13,7 @@ def printResults(url):
 
     if 'analysis' not in path:
         while status != 302:
-            conn = httplib.HTTPConnection(host)
+            conn = http.client.HTTPConnection(host)
             conn.request('GET', path)
             resp = conn.getresponse()
             status = resp.status
@@ -24,13 +23,13 @@ def printResults(url):
 
     print('[+] Scan Complete.')
     path = path.replace('file', 'analysis')
-    conn = httplib.HTTPConnection(host)
+    conn = http.client.HTTPConnection(host)
     conn.request('GET', path)
     resp = conn.getresponse()
     data = resp.read()
     conn.close()
 
-    reResults = re.findall(r'Detection Rate:.*\', data)
+    reResults = re.findall(r'Detection Rate:.*\)', data)
     htmlStipRes = reResults[1].\
         replace('&lt;font color=\'red\'&gt;', '').\
         replace('&lt;/font&gt;', '')
@@ -50,7 +49,7 @@ def uploadFile(fileName):
     params += '\r\nSubmit File\r\n'
     params += '------WebKitFormBoundaryF17rwCZdGuPNPT9U--\r\n'
 
-    conn = httplib.HTTPConnection('vscan.novirusthanks.org')
+    conn = http.client.HTTPConnection('vscan.novirusthanks.org')
     conn.request('POST', '/', params, header)
     response = conn.getresponse()
     location = response.getheader('location')
@@ -60,7 +59,7 @@ def uploadFile(fileName):
 
 def main():
     parser = optparse.OptionParser('usage %prog -f <filename>')
-    parser.add_option('-f', dest='fileName', type='string',help='specify filename')
+    parser.add_option('-f', dest='fileName', type='string', help='specify filename')
     (options, args) = parser.parse_args()
     fileName = options.fileName
 
