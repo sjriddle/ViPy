@@ -39,6 +39,7 @@ def printResults(url):
 def uploadFile(fileName):
     print('[+] Uploading File to NoVirusThanks...')
     fileContents = open(fileName,'rb').read()
+    
     header = {'Content-Type': 'multipart/form-data; boundary=----WebKitFormBoundaryF17rwCZdGuPNPT9U'}
     params = '------WebKitFormBoundaryF17rwCZdGuPNPT9U'
     params += '\r\nContent-Disposition: form-data; ' + 'name=\'upfile\'; filename=\''+str(fileName)+'\''
@@ -54,6 +55,7 @@ def uploadFile(fileName):
     response = conn.getresponse()
     location = response.getheader('location')
     conn.close()
+    
     return location
 
 
