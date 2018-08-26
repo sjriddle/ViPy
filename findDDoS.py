@@ -3,7 +3,6 @@ import optparse
 import socket
 THRESH = 1000
 
-
 def findDownload(pcap):
     for (ts, buf) in pcap:
         try:
