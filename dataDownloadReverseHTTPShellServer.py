@@ -11,9 +11,7 @@ class myHandler(BaseHTTPServer.BaseHTTPRequestHandler):
             try:
                 ctype, pdict = cgi.parse_header(s.headers.getheader('content-type'))
                 if ctype == 'multipart/form-data':
-                    fs = cgi.FieldStorage(fp=s.rfile,
-                                          headers = s.headers,
-                                          environ={'REQUEST_METHOD': 'POST'})
+                    fs = cgi.FieldStorage(fp=s.rfile, headers = s.headers, environ={'REQUEST_METHOD': 'POST'})
                 else:
                     print("[-] Unexpected POST Request")
 
@@ -31,6 +29,7 @@ class myHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         length = int(s.headers['Content-Length'])
         postVar = s.rfile.read(length)
         print(postVar)
+
 
 if __name__ == '__main__':
     server_class = BaseHTTPServer.HTTPServer
