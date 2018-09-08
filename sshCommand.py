@@ -8,6 +8,7 @@ def send_command(child, cmd):
     child.expect(PROMPT)
     print(child.before)
 
+    
 def connect(user, host, password):
     ssh_newkey = 'Are you sure you want to continue connecting'
     connStr = 'ssh ' + user + '@' + host
@@ -17,7 +18,6 @@ def connect(user, host, password):
     if ret == 0:
         print('[-] Error Connecting')
         return
-
     if ret == 1:
         child.sendline('yes')
         ret = child.expect([pexpect.TIMEOUT, '[P|p]assword:'])
@@ -38,5 +38,6 @@ def main():
     child = connect(user, host, password)
     send_command(child, 'cat /etc/shadow | grep root')
 
+    
 if __name__ == '__main__':
     main()
