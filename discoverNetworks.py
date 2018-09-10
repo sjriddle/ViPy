@@ -6,7 +6,6 @@ import urlparse
 import urllib
 from _winreg import *
 
-
 def val2addr(val):
     addr = ''
     for ch in val:
