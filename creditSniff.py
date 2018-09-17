@@ -24,13 +24,11 @@ def main():
                       type='string', 
                       help='specify interface to listen on')
     (options, args) = parser.parse_args()
-
     if options.interface == None:
         print(parser.usage)
         exit(0)
     else:
         conf.iface = options.interface
-
     try:
         print('[*] Starting Credit Card Sniffer.')
         sniff(filter='tcp', prn=findCreditCard, store=0)
