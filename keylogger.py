@@ -8,7 +8,6 @@ kernel32 = windll.kernel32
 psapi    = windll.psapi
 current_window = None
 
-
 def get_current_process():
 
     # get a handle to the foreground window
