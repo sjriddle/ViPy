@@ -6,13 +6,14 @@ import signal
 import argparse
 import re
 import logging
-logging.getLogger("scapy.runtime").setLevel(logging.ERROR)
 from scapy.all import *
-conf.verb = 0
 from threading import Thread, Lock
 import struct
 import socket
 import fcnt1
+
+conf.verb = 0
+logging.getLogger("scapy.runtime").setLevel(logging.ERROR)
 
 lock = Lock()
 DN = open(os.devnull, 'w')
@@ -23,6 +24,7 @@ forw = '0\n' # for resetting ip forwarding to original state
 ap_mac = '' # for sniff's cb function
 err = None # check if channel hopping is working
 
+
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("-c", "--channel", help="Choose the channel for the fake AP. Default is channel 6")
@@ -31,10 +33,6 @@ def parse_args():
     parser.add_argument("-t", "--targeting", help="Will print a list of APs in range and allow you to copy their settings except for the encryption which by default will be open", action="store_true")
     return parser.parse_args()
 
-
-###############
-# AP TARGETING
-###############
 
 def channel_hop(mon_iface):
     global chan, err
@@ -57,6 +55,9 @@ from the network if you have not already\n'
         except KeyboardInterrupt:
             sys.exit()
 
+###################
+# AP TARGETING
+###################
 def target_APs():
     os.system('clear')
     if err:
@@ -67,6 +68,7 @@ def target_APs():
     for ap in APs:
         print G+str(ap).ljust(2)+W+' - '+APs[ap][0].ljust(2)+' - '+T+APs[ap][1]+W
 
+        
 def copy_AP():
     copy = None
     while not copy:
@@ -82,6 +84,7 @@ def copy_AP():
         essid = ' '
     mac = APs[copy][2]
     return channel, essid, mac
+
 
 def targeting_cb(pkt):
     global APs, count
@@ -111,6 +114,7 @@ def get_isc_dhcp_server():
         else:
             sys.exit('['+R+'-'+W+'] isc-dhcp-server not found in /usr/sbin/dhcpd')
 
+            
 def iwconfig():
     monitors = []
     interfaces = {}
@@ -128,6 +132,7 @@ def iwconfig():
                     interfaces[iface] = 0
     return monitors, interfaces
 
+
 def rm_mon():
     monitors, interfaces = iwconfig()
     for m in monitors:
@@ -138,6 +143,7 @@ def rm_mon():
             Popen(['iw', 'dev', m, 'mode', 'managed'], stdout=DN, stderr=DN)
             Popen(['ifconfig', m, 'up'], stdout=DN, stderr=DN)
 
+            
 def internet_info(interfaces):
     '''return the internet connected iface'''
     inet_iface = None
@@ -153,11 +159,13 @@ def internet_info(interfaces):
     else:
         sys.exit('['+R+'-'+W+'] No active internet connection found. Exiting')
 
+        
 def AP_iface(interfaces, inet_iface):
     for i in interfaces:
         if i != inet_iface:
             return i
 
+        
 def iptables(inet_iface):
     global forw
     os.system('iptables -X')
@@ -170,6 +178,7 @@ def iptables(inet_iface):
         ipf.write('1\n')
         return forw
 
+    
 def start_monitor(ap_iface, channel):
     proc = Popen(['airmon-ng', 'start', ap_iface, channel], stdout=PIPE, stderr=DN)
     # todo: cleanup
@@ -185,7 +194,6 @@ def start_monitor(ap_iface, channel):
             if ap_iface+'mon' in s:
                 mon_iface = s[s.find(']')+1:-1]
                 return mon_iface
-
     sys.exit('[-] Monitor mode not found. Paste output of `airmon-ng start [interface]` to github issues\n'
              'https://github.com/DanMcInerney/fakeAP/issues')
 
@@ -196,6 +204,7 @@ def get_mon_mac(mon_iface):
     info = fcntl.ioctl(s.fileno(), 0x8927, struct.pack('256s', mon_iface[:15]))
     mac = ''.join(['%02x:' % ord(char) for char in info[18:24]])[:-1]
     return mac
+
 
 def start_ap(mon_iface, channel, essid, args):
     print '['+T+'*'+W+'] Starting the fake access point...'
@@ -210,11 +219,13 @@ def start_ap(mon_iface, channel, essid, args):
     Popen(['ifconfig', 'at0', 'up', '10.0.0.1', 'netmask', '255.255.255.0'], stdout=DN, stderr=DN)
     Popen(['ifconfig', 'at0', 'mtu', '1400'], stdout=DN, stderr=DN)
 
+    
 def sniffing(interface, cb):
     '''This exists for if/when I get deauth working
     so that it's easy to call sniff() in a thread'''
     sniff(iface=interface, prn=cb, store=0)
 
+    
 def dhcp_conf(ipprefix):
     config = ('default-lease-time 300;\n'
               'max-lease-time 360;\n'
@@ -235,6 +246,7 @@ def dhcp_conf(ipprefix):
             dhcpconf.write(config % ('172.16.0.0', '172.16.0.2 172.16.0.100', '172.16.0.1', '8.8.8.8'))
     return '/tmp/dhcpd.conf'
 
+
 def dhcp(dhcpconf, ipprefix):
     os.system('echo > /var/lib/dhcp/dhcpd.leases')
     dhcp = Popen(['dhcpd', '-cf', dhcpconf], stdout=PIPE, stderr=DN)
@@ -243,6 +255,7 @@ def dhcp(dhcpconf, ipprefix):
     else:
         os.system('route add -net 172.16.0.0 netmask 255.255.255.0 gw 172.16.0.1')
 
+        
 def mon_mac(mon_iface):
     '''
     http://stackoverflow.com/questions/159137/getting-mac-address
@@ -251,6 +264,7 @@ def mon_mac(mon_iface):
     info = fcntl.ioctl(s.fileno(), 0x8927, struct.pack('256s', mon_iface[:15]))
     mac = ''.join(['%02x:' % ord(char) for char in info[18:24]])[:-1]
     return mac
+
 
 def cleanup(signal, frame):
     with open('/proc/sys/net/ipv4/ip_forward', 'r+') as forward:
@@ -264,14 +278,13 @@ def cleanup(signal, frame):
     rm_mon()
     sys.exit('\n['+G+'+'+W+'] Cleaned up')
 
+    
 def main(args):
     global ipf, mon_iface, ap_mac
-
     if os.geteuid() != 0:
         sys.exit('['+R+'-'+W+'] Run as root')
 
     get_isc_dhcp_server()
-
     channel = '1'
     if args.channel:
         channel = args.channel
