@@ -55,6 +55,7 @@ from the network if you have not already\n'
         except KeyboardInterrupt:
             sys.exit()
 
+            
 ###################
 # AP TARGETING
 ###################
@@ -103,6 +104,7 @@ def targeting_cb(pkt):
         APs[count] = [ap_channel, essid, mac]
         target_APs()
 
+        
 ###################
 # END AP TARGETING
 ###################
