@@ -4,7 +4,6 @@ import os
 import optparse
 import re
 
-
 def printLinks(url):
     ab = anonBrowser()
     ab.anonymize()
