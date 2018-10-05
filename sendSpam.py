@@ -70,5 +70,6 @@ def main():
     print("[+] Sending Msg " + spamMsg)
     sendMail(user, pwd, tgt, 'Re: Important', spamMsg)
 
+
 if __name__ == '__main__':
     main()
