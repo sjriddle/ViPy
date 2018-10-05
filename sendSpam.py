@@ -1,7 +1,6 @@
 #!/usr/bin/python
 import smtplib
 import optparse
-
 from email.mime.text import MIMEText
 from twitterClass import *
 from random import choice
@@ -11,7 +10,6 @@ def sendMail(user, pwd, to, subject, text):
     msg['From'] = user
     msg['To'] = to
     msg['Subject'] = subject
-
     try:
         smtpServer = smtplib.SMTP('smtp.gmail.com', 587)
         print ("[+] Connecting To Mail Server.")
@@ -41,7 +39,6 @@ def main():
     tgt = options.tgt
     user = options.user
     pwd = options.pwd
-
     if handle == None or tgt == None or user == None or pwd == None:
         print parser.usage
         exit(0)
@@ -59,15 +56,12 @@ def main():
     if (location != None):
         randLoc = choice(location)
         spamMsg += " It's me from " + randLoc + "."
-
     if (interests['users'] != None):
         randUser=choice(interests['users'])
 	    spamMsg += " " + randUser + " said to say hello."
-
     if (interests['hashtags'] != None):
 	    randHash=choice(interests['hashtags'])
         spamMsg += " Did you see all the fuss about " + randHash+"?"
-
     if (interests['links'] != None):
 	    randLink=choice(interests['links'])
 	    spamMsg += " I really liked your link to: " + randLink + "."
