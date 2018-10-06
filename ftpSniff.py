@@ -16,7 +16,7 @@ def ftpSniff(pkt):
 
 
 def main():
-    parser = opparse.OptionParser('usage %prog -i <interface>')
+    parser = optparse.OptionParser('usage %prog -i <interface>')
     parser.add_option('-i', dest='interface', type='string', help='specufy interface on listen on')
     (options, args) = parser.parse_args()
     if options.interface == None:
