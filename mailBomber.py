@@ -7,6 +7,8 @@ from email.MIMEText import MIMEText
 class SMTP(object):
     def title(self):
         print('[+] PYTHON MAIL BOMBER: SUCCESS')
+        
+        
     def SMTPconnect(self):
         print('We are in the SMTPconnect')
         self.smtpserver = raw_input('\nEnter SMTP Server: ')
@@ -26,6 +28,8 @@ class SMTP(object):
               print 'Error: %s' % (e)
               time.sleep(3)
               sys.exit(1)
+                
+                
     def buildEmail(self):
         print('We are inside buildEmail')
         print('\tBuilding Message Part')
@@ -45,6 +49,7 @@ class SMTP(object):
             print('Send %d messages to %s' %(self.amount, self.To))
             time.sleep(7)
 
+            
 if __name__ = '__main__':
     s = SMTP()
     s.title()
