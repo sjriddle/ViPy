@@ -3,7 +3,6 @@ import os
 import sqlite3
 import optparse
 
-
 def isMessageTable(iphoneDB):
     try:
         conn = sqlite3.connect(iphoneDB)
