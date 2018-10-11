@@ -9,6 +9,7 @@ def printMeta(fileName):
     for metaItem in docInfo:
         print('[+] ' + metaItem + ':' + docInfo[metaItem])
 
+        
 def main():
     parser = optparse.OptionParser('usage %prog ' + '-F <PDF File Name>')
     parser.add_option('-F', dest='fileName', type='string', help='specify PDF File Name')
