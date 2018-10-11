@@ -21,5 +21,6 @@ def main():
     else:
         printMeta(fileName)
 
+        
 if __name == '__main__':
     main()
