@@ -8,7 +8,6 @@ def get_tweets(handle):
     tweets = []
     browser = anonBrowser()
     browser.anonymize()
-
     response = browser.open('http://search.twitter.com/' + 'search.json?q=' + query)
 
     json_objects = json.load(response)
