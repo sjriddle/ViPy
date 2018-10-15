@@ -3,11 +3,9 @@ import os
 import struct
 from ctypes import *
 
-# Host to listen on
 host = "{INPUT HOST}"
 
 class IP(Structure):
-
     _fields_ = [
         ("ihl",           c_ubyte, 4),
         ("version",       c_ubyte, 4),
