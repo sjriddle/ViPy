@@ -1,8 +1,6 @@
 #!/usr/bin/python
-# -*- coding: utf-8 -*-
 from scapy.all import *
 from bluetooth import *
-
 
 def retBtAddr(addr):
     btAddr=str(hex(int(addr.replace(':', ''), 16) + 1))[2:]
