@@ -6,6 +6,7 @@ import os
 import optparse
 from urllib import *
 
+
 def printResults(url):
     status = 200
     host = urlparse(url)[1]
