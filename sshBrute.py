@@ -37,7 +37,6 @@ def main():
     host = options.tgtHost
     passwdFile = options.passwdFile
     user = options.user
-
     if host == None or passwdFile == None or user == None:
         print(parser.usage)
         exit(0)
@@ -54,9 +53,10 @@ def main():
         connection_lock.acquire()
         password = line.strip('\r').strip('\n')
         print("[-] Testing: " + str(password))
-        
+
         t = Thread(target=connect, args=(host, user, password, True))
         child = t.start()
 
+        
 if __name__ = '__main__':
     main()
