@@ -53,7 +53,6 @@ def main():
         connection_lock.acquire()
         password = line.strip('\r').strip('\n')
         print("[-] Testing: " + str(password))
-
         t = Thread(target=connect, args=(host, user, password, True))
         child = t.start()
 
