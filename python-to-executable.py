@@ -1,7 +1,7 @@
-from distutils.core import setup
 import py2exe
 import os
 import sys
+from distutils.core import setup
 
 sys.argv.appen("py3.exe")
 setup(
