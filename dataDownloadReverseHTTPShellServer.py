@@ -5,7 +5,6 @@ HOST_NAME = '10.10.10.100'
 PORT_NUMBER = 80
 
 class myHandler(BaseHTTPServer.BaseHTTPRequestHandler):
-    
     def do_get(s):
         if s.path == '/store':
             try:
