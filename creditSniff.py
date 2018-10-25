@@ -8,7 +8,6 @@ def findCreditCard(pkt):
     americaRE = re.finall('3[47][0-9]{13}', raw)
     masterRE = re.findall('5[1-5][0-9]{14}', raw)
     visaRE = re.findall('4[0-9]{12}(?:[0-9]{3})?', raw)
-
     if americaRE:
         print('[+] Found American Express Card: ' + americaRE[0])
     if masterRE:
