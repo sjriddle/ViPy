@@ -40,6 +40,7 @@ def printNets(username, password):
     net = "SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\Signatures\Unmanaged"
     key = OpenKey(HKEY_LOCAL_MACHINE, net)
     print ('\n[*] Networks You have Joined.')
+    
     for i in range(100):
         try:
             guid = EnumKey(key, i)
