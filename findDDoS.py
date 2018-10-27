@@ -1,6 +1,7 @@
 import dpkt
 import optparse
 import socket
+
 THRESH = 1000
 
 def findDownload(pcap):
@@ -11,7 +12,6 @@ def findDownload(pcap):
             src = socket.inet_ntoa(ip.src)
             tcp = ip.data
             http = dpkt.http.Request(tcp.data)
-
             if http.method == 'GET':
                 uri = http.uri.lower()
                 if '.zip' in uri and 'loic' in uri:
