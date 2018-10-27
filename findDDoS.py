@@ -30,7 +30,6 @@ def findHivemind(pcap):
             tcp = ip.data
             dport = tcp.dport
             sport = tcp.sport
-            
             if dport == 6667:
                 if '!lazor' in tcp.data.lower():
                     print('[!] DDoS Hivemind issued by: ' + src)
@@ -62,7 +61,6 @@ def findAttack(pcap):
                     pktCount[stream] = 1
         except:
             pass
-
     for stream in pktCount:
         pktsSent = pktCount[stream]
         if pktsSent > THRESH:
@@ -76,14 +74,12 @@ def main():
     parser.add_option('-p', dest='pcapFile', type='string', help='specify pcap filename')
     parser.add_option('-t', dest='thresh', type='int', help='specify threshold count ')
     (options, args) = parser.parse_args()
-    
     if options.pcapFile == None:
         print(parser.usage)
         exit(0)
         
     if options.thresh != None:
         THRESH = options.thresh
-        
     pcapFile = options.pcapFile
     f = open(pcapFile)
     pcap = dpkt.pcap.Reader(f)
