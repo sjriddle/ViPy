@@ -9,8 +9,8 @@ from volatility.plugins.registry.lsadump import HashDump
 
 memory_file = "WinXPSP2.vmem"
 sys.path.append("/Downloads/volatility-2.3.1")
-
 registry.PluginImporter()
+
 config = conf.ConfObject()
 config.parse_options()
 config.PROFILE  = "WinXPSP2x86"
@@ -38,6 +38,5 @@ for offset in registry.all_offsets:
         for hash in hashdump.calculate():
             print(hash)
         break
-
 if sam_offset is None or sys_offset is None:
     print("[*] Failed to find the system or SAM offsets.")
