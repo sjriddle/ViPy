@@ -14,7 +14,6 @@ def connect(user, host, password):
     connStr = 'ssh ' + user + '@' + host
     child = pexpect.spawn(connStr)
     ret = child.expect([pexpect.TIMEOUT, ssh_newkey,'[P|p]assword:'])
-
     if ret == 0:
         print('[-] Error Connecting')
         return
@@ -24,7 +23,6 @@ def connect(user, host, password):
         if ret == 0:
             print('[-] Error Connecting')
             return
-
     child.sendline(password)
     child.expect(PROMPT)
     return child
@@ -34,7 +32,6 @@ def main():
     host = 'localhost'
     user = 'root'
     password = 'toor'
-
     child = connect(user, host, password)
     send_command(child, 'cat /etc/shadow | grep root')
 
