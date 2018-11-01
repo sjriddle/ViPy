@@ -9,7 +9,6 @@ def printRecord(tgt):
     country = rec['country_name']
     long = rec['longitude']
     lat = rec['latitude']
-
     print('[*] Target: ' + tgt + ' Geo-located. ')
     print('[+] ' + str(city) + ', ' + str(region) + ', ' + str(country))
     print('[+] Latitude: ' + str(lat) + ', Longitude: ' + str(long))
