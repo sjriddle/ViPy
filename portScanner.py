@@ -50,5 +50,6 @@ def main():
         exit(0)
     portScan(tgtHost, tgtPorts)
 
+    
 if __name__ == "__main__":
     main()
