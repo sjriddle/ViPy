@@ -8,8 +8,7 @@ class Bot:
         self.password = password
         self.sessions = self.ssh()
 
-
-    # Secure shell into client
+    # SSH into client
     def ssh(self):
         try:
             bot = pxssh.pxssh()
