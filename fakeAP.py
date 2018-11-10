@@ -241,7 +241,7 @@ def dhcp_conf(ipprefix):
               '}')
     if ipprefix == '19' or ipprefix == '17':
         with open('/tmp/dhcpd.conf', 'w') as dhcpconf:
-            # subnet, range, router, dns
+            # subnet | range | router | dns
             dhcpconf.write(config % ('10.0.0.0', '10.0.0.2 10.0.0.100', '10.0.0.1', '8.8.8.8'))
     elif ipprefix == '10':
         with open('/tmp/dhcpd.conf', 'w') as dhcpconf:
