@@ -7,7 +7,6 @@ def printCookies(url):
     cookie_jar = cookielib.LWPCookieJar()
     browser.set_cookiejar(cookie_jar)
     page = browser.open(url)
-
     for cookie in cookie_jar:
         print(cookie)
 
