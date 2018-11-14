@@ -1,4 +1,3 @@
-#!/usr/bin/python
 import json
 import urllib
 from anonBrowser import *
