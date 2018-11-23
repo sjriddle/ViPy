@@ -22,7 +22,6 @@ class myHandler(BaseHTTPServer.BaseHTTPRequestHandler):
             except Exception as e:
                 print(e)
             return
-        
         s.send_response(200)
         s.end_headers()
         length = int(s.headers['Content-Length'])
