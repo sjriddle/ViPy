@@ -18,7 +18,6 @@ for r,d,f in os.walk("."):
         if os.path.splitext(files)[1] not in filters:
             web_paths.put(remote_path)
 
-            
 def test_remote():
     while not web_paths.empty(): 
         path = web_paths.get()
@@ -32,7 +31,6 @@ def test_remote():
         except urllib2.HTTPError as error: 
             print("Failed %s" % error.code)
             pass
-        
         
 for i in range(threads): 
     print("Spawning thread: %d" % i)
