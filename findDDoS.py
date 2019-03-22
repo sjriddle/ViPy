@@ -3,7 +3,6 @@ import optparse
 import socket
 
 THRESH = 1000
-
 def findDownload(pcap):
     for (ts, buf) in pcap:
         try:
@@ -34,7 +33,6 @@ def findHivemind(pcap):
                 if '!lazor' in tcp.data.lower():
                     print('[!] DDoS Hivemind issued by: ' + src)
                     print('[+] Target CMD: ' + tcp.data)
-                    
             if sport == 6667:
                 if '!lazor' in tcp.data.lower():
                     print('[!] DDoS Hivemind issued to: ' + src)
@@ -77,9 +75,9 @@ def main():
     if options.pcapFile == None:
         print(parser.usage)
         exit(0)
-        
     if options.thresh != None:
         THRESH = options.thresh
+        
     pcapFile = options.pcapFile
     f = open(pcapFile)
     pcap = dpkt.pcap.Reader(f)
