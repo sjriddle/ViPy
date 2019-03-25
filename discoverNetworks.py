@@ -39,7 +39,7 @@ def wiglePrint(username, password, netid):
 def printNets(username, password):
     net = "SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\Signatures\Unmanaged"
     key = OpenKey(HKEY_LOCAL_MACHINE, net)
-    print ('\n[*] Networks You have Joined.')
+    print ('\n[*] Networks you have joined.')
     
     for i in range(100):
         try:
@@ -61,7 +61,6 @@ def main():
     parser.add_option('-u', dest='username', type='string', help='specify wigle password')
     parser.add_option('-p', dest='password', type='string', help='specify wigle username')
     (options, args) = parser.parse_args()
-    
     username = options.username
     password = options.password
     if username == None or password == None:
