@@ -33,21 +33,23 @@ class SMTP(object):
     def buildEmail(self):
         print('We are inside buildEmail')
         print('\tBuilding Message Part')
-            self.From = raw_input("\nFrom: ")
-            self.To = raw_input("\nTo: ")
-            self.Subject = raw_input("\nSubject: ")
-            self.Message = raw_input("\nMessage: ")
-            messageData = MIMEText(self.Message)
-            messageData['From']=self.From
-            messageData['To']=self.To
-            messageData['Subject']=self.Subject
-            self.amount = input('How many times would you like to send the message: ')
-            x = 0
-            while x < self.amount:
-                self.mailServer.sendmail(self.From, self.To, messageData.as_string())
-                x += 1
-            print('Send %d messages to %s' %(self.amount, self.To))
-            time.sleep(7)
+        self.From = raw_input("\nFrom: ")
+        self.To = raw_input("\nTo: ")
+        self.Subject = raw_input("\nSubject: ")
+        self.Message = raw_input("\nMessage: ")
+
+        messageData = MIMEText(self.Message)
+        messageData['From']=self.From
+        messageData['To']=self.To
+        messageData['Subject']=self.Subject
+
+        self.amount = input('How many times would you like to send the message: ')
+        x = 0
+        while x < self.amount:
+            self.mailServer.sendmail(self.From, self.To, messageData.as_string())
+            x += 1
+        print('Send %d messages to %s' %(self.amount, self.To))
+        time.sleep(7)
 
             
 if __name__ = '__main__':
