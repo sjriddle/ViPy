@@ -1,7 +1,7 @@
 import BaseHTTPServer
 import os, cgi
 
-HOST_NAME = '10.10.10.100'
+HOST_NAME = '127.0.0.1'
 PORT_NUMBER = 80
 
 class myHandler(BaseHTTPServer.BaseHTTPRequestHandler):
