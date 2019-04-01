@@ -11,5 +11,5 @@ def anonLogin(hostname):
         print('\n[-] ' + str(hostname) + ' FTP Anonymous Login Fail.')
         return False
 
-host = '127.0.0.1' # Change host
+host = '127.0.0.1'
 anonLogin(host)
