@@ -12,7 +12,7 @@ def sendMail(user, pwd, to, subject, text):
     msg['Subject'] = subject
     try:
         smtpServer = smtplib.SMTP('smtp.gmail.com', 587)
-        print ("[+] Connecting To Mail Server.")
+        print("[+] Connecting To Mail Server.")
         smtpServer.ehlo()
         print("[+] Starting Encryped Session.")
         smtpServer.starttls()
@@ -61,7 +61,7 @@ def main():
 	    spamMsg += " " + randUser + " said to say hello."
     if (interests['hashtags'] != None):
 	    randHash=choice(interests['hashtags'])
-        spamMsg += " Did you see all the fuss about " + randHash+"?"
+        spamMsg += " Did you see all the fuss about " + randHash + "?"
     if (interests['links'] != None):
 	    randLink=choice(interests['links'])
 	    spamMsg += " I really liked your link to: " + randLink + "."
