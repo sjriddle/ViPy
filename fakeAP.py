@@ -17,13 +17,12 @@ logging.getLogger("scapy.runtime").setLevel(logging.ERROR)
 
 lock = Lock()
 DN = open(os.devnull, 'w')
-APs = {} # for listing APs
-chan = 0 # for channel hopping Thread
-count = 0 # for channel hopping Thread
-forw = '0\n' # for resetting ip forwarding to original state
-ap_mac = '' # for sniff's cb function
-err = None # check if channel hopping is working
-
+APs = {}
+chan = 0
+count = 0
+forw = '0\n'
+ap_mac = ''
+err = None
 
 def parse_args():
     parser = argparse.ArgumentParser()
@@ -56,18 +55,16 @@ from the network if you have not already\n'
             sys.exit()
 
             
-###################
 # AP TARGETING
-###################
 def target_APs():
     os.system('clear')
     if err:
         print err
-    print '['+G+'+'+W+'] Ctrl-C at any time to copy an access point from below'
-    print 'num  ch   ESSID'
-    print '---------------'
+    print('['+G+'+'+W+'] Ctrl-C at any time to copy an access point from below')
+    print('num  ch   ESSID')
+    print('---------------')
     for ap in APs:
-        print G+str(ap).ljust(2)+W+' - '+APs[ap][0].ljust(2)+' - '+T+APs[ap][1]+W
+        print(G+str(ap).ljust(2)+W+' - '+APs[ap][0].ljust(2)+' - '+T+APs[ap][1]+W)
 
         
 def copy_AP():
@@ -105,9 +102,7 @@ def targeting_cb(pkt):
         target_APs()
 
         
-###################
 # END AP TARGETING
-###################
 def get_isc_dhcp_server():
     if not os.path.isfile('/usr/sbin/dhcpd'):
         install = raw_input('['+T+'*'+W+'] isc-dhcp-server not found in /usr/sbin/dhcpd, install now? [y/n] ')
@@ -150,7 +145,7 @@ def internet_info(interfaces):
     '''return the internet connected iface'''
     inet_iface = None
     proc = Popen(['/sbin/ip', 'route'], stdout=PIPE, stderr=DN)
-    def_route = proc.communicate()[0].split('\n')#[0].split()
+    def_route = proc.communicate()[0].split('\n')[0].split()
     for line in def_route:
         if 'default via' in line:
             line = line.split()
@@ -183,9 +178,7 @@ def iptables(inet_iface):
     
 def start_monitor(ap_iface, channel):
     proc = Popen(['airmon-ng', 'start', ap_iface, channel], stdout=PIPE, stderr=DN)
-    # todo: cleanup
     proc_lines = proc.communicate()[0].split('\n')
-    # Old airmon-ng
     for line in proc_lines:
         if "monitor mode enabled" in line:
             line = line.split()
@@ -297,13 +290,15 @@ def main(args):
     monitors, interfaces = iwconfig()
     rm_mon()
     inet_iface, ipprefix = internet_info(interfaces)
+    
     ap_iface = AP_iface(interfaces, inet_iface)
     if not ap_iface:
         sys.exit('['+R+'-'+W+'] Found internet connected interface in '+T+inet_iface+W+'. Please bring up a wireless interface to use as the fake access point.')
     ipf = iptables(inet_iface)
-    print '['+T+'*'+W+'] Cleared leases, started DHCP, set up iptables'
+    print('['+T+'*'+W+'] Cleared leases, started DHCP, set up iptables')
     mon_iface = start_monitor(ap_iface, channel)
     mon_mac1 = get_mon_mac(mon_iface)
+    
     if args.targeting:
         hop = Thread(target=channel_hop, args=(mon_iface,))
         hop.daemon = True
@@ -316,11 +311,11 @@ def main(args):
     while 1:
         signal.signal(signal.SIGINT, cleanup)
         os.system('clear')
-        print '['+T+'*'+W+'] '+T+essid+W+' set up on channel '+T+channel+W+' via '+T+mon_iface+W+' on '+T+ap_iface+W
-        print '\nDHCP leases log file:'
+        print('['+T+'*'+W+'] '+T+essid+W+' set up on channel '+T+channel+W+' via '+T+mon_iface+W+' on '+T+ap_iface+W)
+        print('\nDHCP leases log file:')
         proc = Popen(['cat', '/var/lib/dhcp/dhcpd.leases'], stdout=PIPE, stderr=DN)
         for line in proc.communicate()[0].split('\n'):
-            print line
+            print(line)
         time.sleep(1)
 
 main(parse_args())
