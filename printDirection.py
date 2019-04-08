@@ -13,7 +13,6 @@ def printPcap(pcap):
         except:
             pass
 
-
 def main():
     f = open('example.pcap')
     pcap = dpkt.pcap.Reader(f)
@@ -22,4 +21,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-    
