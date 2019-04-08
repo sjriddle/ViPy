@@ -10,5 +10,5 @@ def printCookies(url):
     for cookie in cookie_jar:
         print(cookie)
 
-url = 'https://{INSERT URL}'
+url = 'https://{127.0.0.1}'
 printCookies(url)
