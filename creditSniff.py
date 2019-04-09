@@ -14,13 +14,9 @@ def findCreditCard(pkt):
     if visaRE:
         print('[+] Found Visa Card: ' + visaRE[0])
 
-
 def main():
     parser = optparse.OptionParser('usage %prof -i <interface>')
-    parser.add_option('-i', 
-                      dest='interface', 
-                      type='string', 
-                      help='specify interface to listen on')
+    parser.add_option('-i', dest='interface', type='string', help='specify interface to listen on')
     (options, args) = parser.parse_args()
     if options.interface == None:
         print(parser.usage)
