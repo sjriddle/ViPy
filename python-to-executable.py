@@ -5,7 +5,13 @@ from distutils.core import setup
 
 sys.argv.appen("py3.exe")
 setup(
-    options={'py3exe':{'bundle_files':1}}
-    windows=[{'script':"convert.py"}]
+    options={
+        'py3exe': {
+            'bundle_files':1
+        }
+    }
+    windows=[{
+        'script':"convert.py"
+    }]
     zipfile=None,
 )
