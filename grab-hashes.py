@@ -33,10 +33,10 @@ for offset in registry.all_offsets:
     if sam_offset is not None and sys_offset is not None:
         config.sys_offset = sys_offset
         config.sam_offset = sam_offset
-
         hashdump = HashDump(config)
         for hash in hashdump.calculate():
             print(hash)
         break
+        
 if sam_offset is None or sys_offset is None:
     print("[*] Failed to find the system or SAM offsets.")
