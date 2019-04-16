@@ -6,7 +6,6 @@ def ftpSniff(pkt):
     raw = pkt.sprintf('%Raw.Load%')
     user = re.findall('(?i)USER (.*)', raw)
     pswd = re.findall('(?i)PASS (.*)', raw)
-
     if user:
         print('[+] Detected FTP Login to ' + str(dest))
         print('[+] User account: ' + str(user[0]))
