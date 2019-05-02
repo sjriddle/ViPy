@@ -33,7 +33,6 @@ def main():
     parser = optparse.OptionParser("usage %prog -p <iPhone Backup Directory> ")
     parser.add_option('-p', dest='pathName, type='string', help='specify skype profile path')
     (options, args) = parser.parse_args()
-
     pathName = options.pathName
     if pathName == None:
         print(parser.usage)
