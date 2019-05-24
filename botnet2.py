@@ -7,7 +7,6 @@ class Bot:
         self.password = password
         self.sessions = self.ssh()
 
-        
     def ssh(self):
         try:
             bot = pxssh.pxssh()
@@ -17,21 +16,19 @@ class Bot:
             print('Connection failure')
             print(e)
 
-            
     def send_command(self, cmd):
         self.session.sendline(cmd)
         self.session.prompt()
         return self.session.before
 
-    
     def command_bots(command):
         for bot in botnet:
             attack = bot.send_command(command)
             print('Output from ' + bot.host)
             print(attack)
 
-
 botnet = []
+
 def add_bot(host, user, password):
     new_bot = Bot(host, user, password)
     botnet.append(new_bot)
