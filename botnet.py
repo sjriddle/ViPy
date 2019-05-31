@@ -26,8 +26,8 @@ class Client:
 def botnetCommand(command):
     for client in botNet:
         output = client.send_command(command)
-        print('[*] Output from ' + client.host)
-        print('[+] ' + output)
+        print(f'[*] Output from {client.host}')
+        print(f'[+] {output}')
 
 def addClient(host, user, password):
     client = Client(host, user, password)
