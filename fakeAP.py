@@ -20,8 +20,8 @@ DN = open(os.devnull, 'w')
 APs = {}
 chan = 0
 count = 0
-forw = '0\n'
 ap_mac = ''
+forw = '0\n'
 err = None
 
 def parse_args():
@@ -40,7 +40,7 @@ def channel_hop(mon_iface):
             err = None
             if chan > 11:
                 chan = 0
-            chan = chan+1
+            chan = chan + 1
             channel = str(chan)
             iw = Popen(['iw', 'dev', mon_iface, 'set', 'channel', channel], stdout=DN, stderr=PIPE)
             for line in iw.communicate()[1].split('\n'):
