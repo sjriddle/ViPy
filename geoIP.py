@@ -9,9 +9,9 @@ def printRecord(tgt):
     long = rec['longitude']
     lat = rec['latitude']
     
-    print('[*] Target: ' + tgt + ' Geo-located. ')
-    print('[+] ' + str(city) + ', ' + str(region) + ', ' + str(country))
-    print('[+] Latitude: ' + str(lat) + ', Longitude: ' + str(long))
+    print(f'[*] Target: {tgt} Geo-located.')
+    print(f'[+] {city}, {region}, {country}')
+    print(f'[+] Latitude: {lat}, Longitude: {long}')
 
 tgt = '127.0.0.1'
 printRecord(tgt)
