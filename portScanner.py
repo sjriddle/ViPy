@@ -2,8 +2,8 @@ from __future__ import print_function
 import optparse
 from socket import *
 from threading import *
-screenLock = Semaphore(value=1)host
 
+screenLock = Semaphore(value=1)host
 def connScan(tgtHost, tgtPort):
     try:
         connSkt = socket(AF_INET, SOCK_STREAM)
