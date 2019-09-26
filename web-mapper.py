@@ -7,8 +7,10 @@ threads = 10
 target = "http://www.test.com"
 directory = "/Users/<USERNAME>/Downloads/joomla3-1.1"
 filters = [".jpg", ".gif", "png", ".css"]
+
 os.chdir(directory)
 web_paths = Queue.Queue()
+
 for r,d,f in os.walk("."):
     for files in f:
         remote_path = "%s/%s" % (r,files)
