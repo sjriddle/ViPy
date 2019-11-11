@@ -3,7 +3,7 @@ import os
 import sys
 from distutils.core import setup
 
-sys.argv.appen("py3.exe")
+sys.argv.append("py3.exe")
 setup(
     options={
         'py3exe': {
