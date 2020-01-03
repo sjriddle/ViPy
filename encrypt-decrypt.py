@@ -9,8 +9,7 @@ def encryptText(input_text, key):
         else:
             key_value = ascii_value + key
             if not((ord("A")) < key_value < ord("Z")):
-                key_value=ord("A") + (key_value-ord("A"))%
-                                    (ord("Z")-ord("A")+1)
+                key_value=ord("A") + (key_value-ord("A")) % (ord("Z")-ord("A")+1)
             result += str(chr(key_value))
         return result
 
