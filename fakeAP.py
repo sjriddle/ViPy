@@ -29,7 +29,7 @@ def parse_args():
     parser.add_argument("-c", "--channel", help="Choose the channel for the fake AP. Default is channel 6")
     parser.add_argument("-w", "--wpa", help="Start the fake AP with WPA beacon tags and capture handshakes in fakeAPlog.cap file", action="store_true")
     parser.add_argument("-e", "--essid", help="Choose the ESSID for the fake AP. Default is 'Free Wifi'. Wrap in quotes if it is more than 1 word: -e 'Free Wifi'")
-    parser.add_argument("-t", "--targeting", help="Will print a list of APs in range and allow you to copy their settings except for the encryption which by default will be open", action="store_true")
+    parser.add_argument("-t", "--targeting", help="Prints a list of APs in range and allow you to copy their settings except for the encryption which by default will be open", action="store_true")
     return parser.parse_args()
 
 
