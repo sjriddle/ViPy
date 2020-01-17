@@ -33,7 +33,7 @@ def wiglePrint(username, password, netid):
     rLon = re.findall(r'maplon=.*\&', resp)
     if rLon:
         mapLon = rLon[0].split
-    print('[-] Lat: ' + mapLat + ', Lon: ' + mapLon)
+    print(f'[-] Lat: {mapLat}, Lon: {mapLon})
 
 
 def printNets(username, password):
@@ -61,6 +61,7 @@ def main():
     parser.add_option('-u', dest='username', type='string', help='specify wigle password')
     parser.add_option('-p', dest='password', type='string', help='specify wigle username')
     (options, args) = parser.parse_args()
+          
     username = options.username
     password = options.password
     if username == None or password == None:
