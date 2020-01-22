@@ -14,7 +14,7 @@ def findDownload(pcap):
             if http.method == 'GET':
                 uri = http.uri.lower()
                 if '.zip' in uri and 'loic' in uri:
-                    print('[!] ' + src + ' Download LOIC.')
+                    print(f'[!] {src} Download LOIC')
         except:
             pass
 
@@ -31,12 +31,12 @@ def findHivemind(pcap):
             sport = tcp.sport
             if dport == 6667:
                 if '!lazor' in tcp.data.lower():
-                    print('[!] DDoS Hivemind issued by: ' + src)
-                    print('[+] Target CMD: ' + tcp.data)
+                    print(f'[!] DDoS Hivemind issued by: {src}')
+                    print(f'[+] Target CMD: {tcp.data}')
             if sport == 6667:
                 if '!lazor' in tcp.data.lower():
-                    print('[!] DDoS Hivemind issued to: ' + src)
-                    print('[+] Target CMD: ' + tcp.data)
+                    print(f'[!] DDoS Hivemind issued to: {src}')
+                    print(f'[+] Target CMD: {tcp.data}')
         except:
             pass
 
@@ -64,8 +64,7 @@ def findAttack(pcap):
         if pktsSent > THRESH:
             src = stream.split(':')[0]
             dst = stream.split(':')[1]
-            print('[+] ' + src + ' attacked ' + dst + ' with ' + str(pktsSent) + ' pkts.')
-
+            print(f'[+] {src} attacked {dst} with {str(pktsSent)} pkts.')
             
 def main():
     parser = optparse.OptionParser("usage %prog ' + '-p <pcap file> -t <thresh>")
