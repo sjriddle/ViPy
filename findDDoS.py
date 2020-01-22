@@ -52,9 +52,9 @@ def findAttack(pcap):
             tcp = ip.data
             dport = tcp.dport
             if dport == 80:
-                stream = src + ':' + dst
+                stream = f'{src}:{dst}'
                 if pktCount.has_key(stream):
-                    pktCount[stream] = pktCount[stream] + 1
+                    pktCount[stream] += 1
                 else:
                     pktCount[stream] = 1
         except:
