@@ -20,7 +20,7 @@ def calTSN(tgt):
         ans = sr1(pkt, verbose=0)
         seqNum = ans.getlayer(TCP).seq
         diffSeq = seqNum - preNum
-        print('[+] TCP Seq Difference: ' + str(diffSeq))
+        print(f'[+] TCP Seq Difference: {str(diffSeq)}')
     return seqNum + diffSeq
 
 
