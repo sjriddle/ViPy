@@ -48,7 +48,7 @@ class SMTP(object):
         while x < self.amount:
             self.mailServer.sendmail(self.From, self.To, messageData.as_string())
             x += 1
-        print('Send %d messages to %s' %(self.amount, self.To))
+        print(f'Send {self.amount} messages to {self.To}')
         time.sleep(7)
 
             
