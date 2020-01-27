@@ -8,7 +8,7 @@ def get_tweets(handle):
     tweets = []
     browser = anonBrowser()
     browser.anonymize()
-    response = browser.open('http://search.twitter.com/' + 'search.json?q=' + query)
+    response = browser.open(f'http://search.twitter.com/search.json?q={query}')
 
     json_objects = json.load(response)
     for result in json_objects['results']:
@@ -45,7 +45,7 @@ def twitter_locate(tweets, cities):
             locations.append(city)
             cityCnt += 1
 
-    print("[+] Found " + str(locCnt) + " locations " + "via Twitter API and " + str(cityCnt) + " locations from text search.")
+    print(f'[+] Found {locCnt} {locations} via Twitter API and {cityCnt} locations from text search.')
     return locations
 
 
@@ -67,7 +67,7 @@ def main():
         cities = load_cities(cityFile)
     tweets = get_tweets(handle)
     locations = twitter_locate(tweers, cities)
-    print("[+] Locations: " + str(locations))
+    print(f'[+] Locations: {locations}')
 
     
 if __name__ == '__main__':
