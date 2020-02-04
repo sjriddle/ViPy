@@ -7,11 +7,10 @@ def ftpSniff(pkt):
     user = re.findall('(?i)USER (.*)', raw)
     pswd = re.findall('(?i)PASS (.*)', raw)
     if user:
-        print('[+] Detected FTP Login to ' + str(dest))
-        print('[+] User account: ' + str(user[0]))
+        print(f'[+] Detected FTP Login to {dest}')
+        print(f'[+] User account: {str(user[0])}')
     elif pswd:
-        print('[+] Password: ' + str(pswd[0]))
-
+        print(f'[+] Password: {str(pswd[0])})
 
 def main():
     parser = optparse.OptionParser('usage %prog -i <interface>')
