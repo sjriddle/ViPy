@@ -69,7 +69,7 @@ def main():
         print(parser.usage)
         exit(0)
     elif os.path.isfile(fileName) == False:
-        print('[+] ' + fileName + ' does not exist.')
+        print(f'[+] {fileName} does not exist.')
         exit(0)
     else:
         loc = uploadFile(fileName)
