@@ -43,31 +43,31 @@ def main():
         print parser.usage
         exit(0)
 
-    print("[+] Fetching tweets from: " + str(handle))
+    print(f"[+] Fetching tweets from: {handle}")
     spamTgt = reconPerson(handle)
     spamTgt.get_tweets()
-    print("[+] Fetching interests from: " + str(handle))
+    print(f"[+] Fetching interests from: {handle}")
     interests = spamTgt.find_interests()
-    print("[+] Fetching location information from: " + str(handle))
+    print(f"[+] Fetching location information from: {handle}")
     location = spamTgt.twitter_locate('mlb-cities.txt')
 
-    spamMsg = "Dear " + tgt + ","
+    spamMsg = f"Dear {tgt},"
 
     if (location != None):
         randLoc = choice(location)
-        spamMsg += " It's me from " + randLoc + "."
+        spamMsg += f" It's me from {randLoc}."
     if (interests['users'] != None):
         randUser=choice(interests['users'])
-	    spamMsg += " " + randUser + " said to say hello."
+	    spamMsg += f" {randUser} said to say hello."
     if (interests['hashtags'] != None):
 	    randHash=choice(interests['hashtags'])
-        spamMsg += " Did you see all the fuss about " + randHash + "?"
+        spamMsg += f" Did you see all the fuss about {randHash}?"
     if (interests['links'] != None):
 	    randLink=choice(interests['links'])
-	    spamMsg += " I really liked your link to: " + randLink + "."
+	    spamMsg += f" I really liked your link to: {randLink}."
 
     spamMsg += " Check out my link to http://<INSERT MALWARE LINK>."
-    print("[+] Sending Msg " + spamMsg)
+    print(f"[+] Sending Msg {spamMsg}")
     sendMail(user, pwd, tgt, 'Re: Important', spamMsg)
 
 
