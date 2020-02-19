@@ -11,11 +11,11 @@ def connScan(tgtHost, tgtPort):
         connSkt.send("hackerman")
         results = connSkt.recv(1024)
         screenLock.acquire()
-        print("[+] %d/tcp open" % (tgtPort))
-        print("[+] " + str(results))
+        print(f"[+] {tgtPort}/tcp open")
+        print(f"[+] {results}"
     except:
         screenLock.acquire()
-        print("[-] %d/tcp closed" % tgtPort)
+        print(f"[-] {tgtPort}/tcp closed")
     finally:
         screenLock.release()
         connSkt.close()
@@ -25,13 +25,13 @@ def portScan(tgtHost, tgtPorts):
     try:
         tgtIP = gethostbyname(tgtHost)
     except:
-        print("[-] Cannot resolve '%s': Unknown Host" % tgtHost)
+        print(f"[-] Cannot resolve {tgtHost}: Unknown Host")
         return
     try:
         tgtName = gethostbyaddr(tgtIP)
-        print("\n[+] Scan Results for: " + tgtName[0])
+        print(f"\n[+] Scan Results for: {tgtName[0]}")
     except:
-        print("\n[+] Scan Results for: " tgtIP)
+        print(f"\n[+] Scan Results for: {tgtIP}")
     setdefaulttimeout(1)
     for tgtPort in tgtPorts:
         t = Thread(target=connScan, args=(tgtHost, int(tgtPort.strip())))
