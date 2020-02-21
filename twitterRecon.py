@@ -10,7 +10,7 @@ class reconPerson:
         self.social_media = social_media
 
     def __repr__(self):
-        return self.first_name + ' ' + self.last_name + ' has job' + self.job
+        return f'{self.first_name} {self.last_name} has job {self.job}'
 
     def get_social(self, media_name):
         if self.social_media.has_ley(media_name):
@@ -21,7 +21,7 @@ class reconPerson:
         query = urllib.quote_plus(query)
         results = []
         browser = anonBrowser()
-        response = browser.open('http://search.twitter.com/search.json?q=' + query)
+        response = browser.open(f'http://search.twitter.com/search.json?q={query}')
         json_objects = json.load(response)
         for result in json_objects['results']:
             new_result = {}
