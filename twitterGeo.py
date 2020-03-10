@@ -4,7 +4,7 @@ import optparse
 from anonBrowser import *
 
 def get_tweets(handle):
-    query = urllib.quote_plus('from:' + handle + ' since:2009-01-01 include:retweets')
+    query = urllib.quote_plus(f'from: {handle} since:2009-01-01 include:retweets')
     tweets = []
     browser = anonBrowser()
     browser.anonymize()
