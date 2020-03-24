@@ -27,10 +27,8 @@ class IP(Structure):
         self.protocol_map = {1:"ICMP", 6:"TCP", 17:"UDP"}
 
         # Human readable IP addresses
-        self.src_address = socket.inet_ntoa(struct.pack("<L",self.src))
-        self.dst_address = socket.inet_ntoa(struct.pack("<L",self.dst))
-
-        # Human readable protocol
+        self.src_address = socket.inet_ntoa(struct.pack("<L", self.src))
+        self.dst_address = socket.inet_ntoa(struct.pack("<L", self.dst))
         try:
             self.protocol = self.protocol_map[self.protocol_num]
         except:
@@ -51,12 +49,10 @@ if os.name == "nt":
     sniffer.ioctl(socket.SIO_RCVALL, socket.RCVALL_ON)
 try:
     while True:
-        # Read in a single packet
+        # Read in a single packet. Create an IP header from the first 20 bytes of the buffer.
         raw_buffer = sniffer.recvfrom(65565)[0]
-    
-        # Create an IP header from the first 20 bytes of the buffer
         ip_header = IP(raw_buffer[0:20])
-        print("Protocol: %s %s -> %s" % (ip_header.protocol, ip_header.src_address, ip_header.dst_address))
+        print(f"Protocol: {ip_header.protocol} {ip_header.src_address} -> {ip_header.dst_address}")
 except KeyboardInterrupt:
     # If we're on Windows turn off promiscuous mode
     if os.name == "nt":
