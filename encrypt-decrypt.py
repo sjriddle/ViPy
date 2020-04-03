@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 def encryptText(input_text, key):
     input_text = input_text.upper()
     result = ''
@@ -19,11 +19,11 @@ def main():
     try:
         user_input = input()
         scrambled_result = encryptText(user_input,10)
-        print("Result: " + scrambled_result)
+        print(f"Result: {scrambled_result}")
         print("To un-scramble, press enter again")
         input()
         unscrambled_result = encryptText(scrambled_result,-10)
-        print("Result: " + unscrambled_result)
+        print(f"Result: {unscrambled_result}")
     except UnicodeDecodeError:
         print("Sorry: Only ASCII Characters are supported")    
 
