@@ -45,8 +45,8 @@ def printNets(username, password):
         try:
             guid = EnumKey(key, i)
             netKey = OpenKey(key, str(guid))
-            (n, addr, t) = EnumValue(netKey, 5)
-            (n, name, t) = EnumValue(netKey, 4)
+            n, addr, t = EnumValue(netKey, 5)
+            n, name, t = EnumValue(netKey, 4)
             macAddr = val2addr(addr)
             netName = str(name)
             print('[+] ' + netName + '  ' + macAddr)
