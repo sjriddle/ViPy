@@ -1,6 +1,6 @@
 from bluetooth import *
 
-def rfcommConnection(addr, port):
+def rfcomm_connection(addr, port):
     sock = BluetoothSocket(RFCOMM)
     try:
         sock.connect((adr,port))
@@ -10,4 +10,4 @@ def rfcommConnection(addr, port):
         print(f'[+] RFCOMM Port {port} closed')
 
 for port in range(1, 30):
-    rfcommConnection('{INSERT MAC ADDRESS}', port)
+    rfcomm_connection('{INSERT MAC ADDRESS}', port)
