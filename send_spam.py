@@ -51,7 +51,7 @@ def main():
     print(f"[+] Fetching location information from: {handle}")
     location = spamTgt.twitter_locate('mlb-cities.txt')
 
-    spamMsg = f"Dear {tgt},"
+    spamMsg = f"Dear {tgt},\n"
 
     if (location != None):
         randLoc = choice(location)
