@@ -10,64 +10,53 @@ def get_tweets(handle):
     browser.anonymize()
     response = browser.open(f'http://search.twitter.com/search.json?q={query}')
 
-    json_objects = json.load(response)
-    for result in json_objects['results']:
-        new_result = {}
-        new_result['from_user'] = result['from_user_name']
-        new_result['geo'] = result['geo']
-        new_result['tweet'] = result['text']
-        tweets.append(new_result)
+    for result in json.load(response)['results']:
+        tweets.append({'from_user': result['from_user_name'], 'geo': result['geo'], 'tweet': result['text']})
 
     return tweets
 
-def load_cities(cityFile):
+def load_cities(city_file):
     cities = []
-    for line in open(cityFile).readlines():
-        city = line.strip('\n').strip('\r').lower()
-        cities.append(city)
+    for line in open(city_file).readlines():
+        cities.append(line.strip('\n').strip('\r').lower())
     return cities
 
 
 def twitter_locate(tweets, cities):
     locations = []
-    locCnt = 0
-    cityCnt = 0
-    tweetsText = ""
+    loc_cnt = 0
+    city_cnt = 0
+    tweets_text = ""
 
     for tweets in tweets:
-        if tweet['geo'] != None:
+        if tweet['geo']:
             locations.append(tweet['geo'])
-            locCnt += 1
-        tweetsText += tweet['tweet'].lower()
+            loc_cnt += 1
+        tweets_text += tweet['tweet'].lower()
 
     for city in cities:
-        if city in tweetsText:
+        if city in tweets_text:
             locations.append(city)
-            cityCnt += 1
+            city_cnt += 1
 
-    print(f'[+] Found {locCnt} {locations} via Twitter API and {cityCnt} locations from text search.')
+    print(f'[+] Found {loc_cnt} {locations} via Twitter API and {city_cnt} locations from text search.')
     return locations
 
 
 def main():
     parser = optparse.OptionParser('usage %prog -u <twitter handle> [-c <list of cities>]')
     parser.add_options('-u', dest='handle', type='string', help='specify twitter handle')
-    parser.add_options('-c', dest='cityFile', type='string', help='specify file containing cities to search')
+    parser.add_options('-c', dest='city_file', type='string', help='specify file containing cities to search')
 
     (options, args) = parser.parse_args()
     handle = options.handle
-    cityFile = options.cityFile
+    city_file = options.city_file
 
-    if (handle == None):
+    if not handle:
         print(parser.usage)
         exit(0)
 
-    cities = []
-    if (cityFile != None):
-        cities = load_cities(cityFile)
-    tweets = get_tweets(handle)
-    locations = twitter_locate(tweers, cities)
-    print(f'[+] Locations: {locations}')
+    print(f'[+] Locations: {twitter_locate(get_tweets(handle), load_cities(city_file) if city_file else [])}')
 
     
 if __name__ == '__main__':
