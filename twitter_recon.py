@@ -2,8 +2,8 @@ import json
 import urllib
 from anonBrowser import *
 
-class reconPerson:
-    def __init__(self, first_name, last_name, job='', social_media={}):
+class ReconPerson:
+    def __init__(self, first_name: str, last_name: str, job: str='', social_media: dict={}):
         self.first_name = first_name
         self.last_name = last_name
         self.job = job
@@ -22,14 +22,9 @@ class reconPerson:
         results = []
         browser = anonBrowser()
         response = browser.open(f'http://search.twitter.com/search.json?q={query}')
-        json_objects = json.load(response)
-        for result in json_objects['results']:
-            new_result = {}
-            new_result['from_user'] = result['from_user_name']
-            new_result['geo'] = result['geo']
-            new_result['tweet'] = result['text']
-            results.append(new_result)
+        for result in json.load(response)['results']:
+            results.append({'from_user': result['from_user_name'], 'geo': result['geo'], 'tweet': result['tweet']})
         return results
 
-ap = reconPerson('Boondock', 'Saint')
+ap = ReconPerson('Boondock', 'Saint')
 print(ap.query_twitter('from:th3j35t3r since:2010-01-01 include:retweets'))
