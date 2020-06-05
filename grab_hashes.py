@@ -7,14 +7,13 @@ import volatility.addrspace as addrspace
 from volatility.plugins.registry.registryapi import RegistryApi
 from volatility.plugins.registry.lsadump import HashDump
 
-memory_file = "WinXPSP2.vmem"
 sys.path.append("/Downloads/volatility-2.3.1")
 registry.PluginImporter()
 
 config = conf.ConfObject()
 config.parse_options()
 config.PROFILE  = "WinXPSP2x86"
-config.LOCATION = f"file://{memory_file}"
+config.LOCATION = "file://WinXPSP2.vmem"
 
 registry.register_global_options(config, commands.Command)
 registry.register_global_options(config, addrspace.BaseAddressSpace)
@@ -27,15 +26,18 @@ for offset in registry.all_offsets:
     if registry.all_offsets[offset].endswith("\\SAM"):
         sam_offset = offset
         print("[*] SAM: 0x%08x" % offset)  
+        
     if registry.all_offsets[offset].endswith("\\system"):
         sys_offset = offset
-        print("[*] System: 0x%08x" % offset) 
-    if sam_offset is not None and sys_offset is not None:
+        print("[*] System: 0x%08x" % offset)
+        
+    if sam_offset and sys_offset:
         config.sys_offset = sys_offset
         config.sam_offset = sam_offset
         hashdump = HashDump(config)
         for hash in hashdump.calculate():
             print(hash)
         break
-if sam_offset is None or sys_offset is None:
+
+if not sam_offset or not sys_offset:
     print("[*] Failed to find the system or SAM offsets.")
