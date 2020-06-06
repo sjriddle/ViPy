@@ -9,10 +9,9 @@ def connScan(tgtHost, tgtPort):
         connSkt = socket(AF_INET, SOCK_STREAM)
         connSkt.connect((tgtHost, tgtPort))
         connSkt.send("hackerman")
-        results = connSkt.recv(1024)
         screenLock.acquire()
         print(f"[+] {tgtPort}/tcp open")
-        print(f"[+] {results}"
+        print(f"[+] {connSkt.recv(1024)}"
     except:
         screenLock.acquire()
         print(f"[-] {tgtPort}/tcp closed")
@@ -27,11 +26,13 @@ def portScan(tgtHost, tgtPorts):
     except:
         print(f"[-] Cannot resolve {tgtHost}: Unknown Host")
         return
+
     try:
         tgtName = gethostbyaddr(tgtIP)
         print(f"\n[+] Scan Results for: {tgtName[0]}")
     except:
         print(f"\n[+] Scan Results for: {tgtIP}")
+
     setdefaulttimeout(1)
     for tgtPort in tgtPorts:
         t = Thread(target=connScan, args=(tgtHost, int(tgtPort.strip())))
@@ -43,9 +44,10 @@ def main():
     parser.add_option("-H", dest="tgtHost", type="string", help="specify target host")
     parser.add_option("-p", dest="tgtPort", type="string", help="specify target port(s) separated by space")
     (option, args) = parser.parse_args()
+
     tgtHost = str(options.tgtHost).strip()
     tgtPorts = [s.strip() for s in str(options.tgtPort).split(',')]
-    if (tgtHost == None) | (tgtPorts[0] == None):
+    if not tgtHost || not tgtPorts[0]:
         print(parser.usage)
         exit(0)
     portScan(tgtHost, tgtPorts)
