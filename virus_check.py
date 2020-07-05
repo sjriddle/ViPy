@@ -1,4 +1,3 @@
-#!/usr/bin/python
 import re
 import http.client
 import time
@@ -65,10 +64,10 @@ def main():
     (options, args) = parser.parse_args()
     fileName = options.fileName
 
-    if fileName == None:
+    if not fileName:
         print(parser.usage)
         exit(0)
-    elif os.path.isfile(fileName) == False:
+    elif not os.path.isfile(fileName):
         print(f'[+] {fileName} does not exist.')
         exit(0)
     else:
