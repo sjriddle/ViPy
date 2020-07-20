@@ -1,4 +1,3 @@
-#!/usr/bin/python
 import mechanize
 import cookielib
 
@@ -10,5 +9,5 @@ def printCookies(url):
     for cookie in cookie_jar:
         print(cookie)
 
-url = 'https://{127.0.0.1}'
+url = 'https://127.0.0.1'
 printCookies(url)
