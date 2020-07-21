@@ -1,9 +1,8 @@
-#!/usr/bin/python
 import dpkt
 import socket
 
 def printPcap(pcap):
-    for (ts, buf) in pcap:
+    for ts, buf in pcap:
         try:
             eth = dpkt.ethernet.Ethernet(buf)
             ip = eth.data
@@ -11,7 +10,7 @@ def printPcap(pcap):
             dst = socket.inet_ntoa(ip.dst)
             print(f'[+] src: {src} ---> dst: {dst}')
         except:
-            pass
+            raise Exception
 
 def main():
     f = open('example.pcap')
