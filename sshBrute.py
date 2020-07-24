@@ -3,8 +3,7 @@ import optparse
 import time
 from threading import *
 
-maxConnections = 5
-connection_lock = BoundedSemaphore(value=maxConnections)
+connection_lock = BoundedSemaphore(value=5)
 Found = False
 Fails = 0
 
@@ -29,19 +28,19 @@ def connect(host, user, password, release):
 
 def main():
     parser = optparse.OptionParser('usage %prog '+'-H <target host> -u <user> -F <password list>')
-    parser.add_option('-H', dest='tgtHost', type='string', help='specify target host')
-    parser.add_option('-F', dest='passwdFile', type='string', help='specify password file')
+    parser.add_option('-H', dest='tgt_host', type='string', help='specify target host')
+    parser.add_option('-F', dest='passwd_file', type='string', help='specify password file')
     parser.add_option('-u', dest='user', type='string', help='specify user host')
 
     (options, args) = parser.parse_args()
     host = options.tgtHost
-    passwdFile = options.passwdFile
+    passwd_file = options.passwdFile
     user = options.user
-    if host == None or passwdFile == None or user == None:
+    if not host or not passwd_file or not user:
         print(parser.usage)
         exit(0)
 
-    fn = open(passwdFile, 'r')
+    fn = open(passwd_file, 'r')
     for line in fn.readlines():
         if Found:
             print("[!] Exiting: Password Found")
