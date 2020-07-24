@@ -1,13 +1,13 @@
-import os
 from subprocess import Popen, PIPE
+from scapy.all import *
+from threading import Thread, Lock
+import os
 import time
 import sys
 import signal
 import argparse
 import re
 import logging
-from scapy.all import *
-from threading import Thread, Lock
 import struct
 import socket
 import fcnt1
@@ -54,8 +54,7 @@ from the network if you have not already\n'
         except KeyboardInterrupt:
             sys.exit()
 
-            
-# AP TARGETING
+
 def target_APs():
     os.system('clear')
     if err:
@@ -71,17 +70,15 @@ def copy_AP():
     copy = None
     while not copy:
         try:
-            copy = raw_input('\n['+G+'+'+W+'] Choose the ['+G+'num'+W+'] of the AP you wish to copy: ')
-            copy = int(copy)
+            copy = int(raw_input('\n['+G+'+'+W+'] Choose the ['+G+'num'+W+'] of the AP you wish to copy: '))
         except Exception:
-            copy = None
             continue
     channel = APs[copy][0]
     essid = APs[copy][1]
     if str(essid) == "\x00":
         essid = ' '
     mac = APs[copy][2]
-    return channel, essid, mac
+    return [channel, essid, mac]
 
 
 def targeting_cb(pkt):
@@ -93,7 +90,7 @@ def targeting_cb(pkt):
             return
         essid = pkt[Dot11Elt].info
         mac = pkt[Dot11].addr2
-        if len(APs) > 0:
+        if len(APs):
             for num in APs:
                 if essid in APs[num][1]:
                     return
