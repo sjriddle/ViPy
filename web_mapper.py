@@ -13,7 +13,7 @@ web_paths = Queue.Queue()
 
 for r,d,f in os.walk("."):
     for files in f:
-        remote_path = f"{r}/{files}" % (r,files)
+        remote_path = f"{r}/{files}"
         if remote_path.startswith("."):
             remote_path = remote_path[1:]
         if os.path.splitext(files)[1] not in filters:
