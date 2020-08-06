@@ -1,4 +1,3 @@
-#!/usr/bin/python3
 def encryptText(input_text, key):
     input_text = input_text.upper()
     result = ''
