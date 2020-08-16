@@ -54,8 +54,7 @@ def main():
     if not options.pcapFile:
         print(parser.usage)
         exit(0)
-    if options.thresh:
-        THRESH = options.thresh
+    THRESH = options.thresh if options.thresh else THRESH
         
     pcapFile = options.pcapFile
     f = open(pcapFile)
