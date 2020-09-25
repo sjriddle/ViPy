@@ -10,7 +10,7 @@ def printLinks(url):
     page = ab.open(url)
     html = page.read()
     try:
-        print('[+] Printing Links From Regex.')
+        print('[+] Printing Links From RegEx.')
         link_finder = re.compile('href="(.*?)"')
         links = link_finder.findall(html)
         for link in links:
